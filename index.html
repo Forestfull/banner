@@ -16,17 +16,38 @@
     <link rel="apple-touch-icon" href="icon.png">
     <title>Forest Full</title>
 </head>
-<body style="padding: 0; margin: 0; background: black;">
+<body style="padding: 0; margin: 0; background: black; overflow: hidden;">
 <label>
     <textarea
-            id="console"
-            style="resize: none; width: 100%; height: 90vh; background: black; color: limegreen; padding: 10px; margin: 0; box-sizing: border-box; border: none; font-size: 2.5vw;"
-            readonly>
-beta
+            id="consoles"
+            style="resize: none; width: 100%; height: 100vh; background: black; color: limegreen; padding: 10px; margin: 0; box-sizing: border-box; border: none; font-size: 2.5vw;"
+            readonly></textarea>
+    <textarea id="component" style="display: none;">
+hi
+q
     </textarea>
 </label>
 <script>
+    (function (){
+        const consoles = document.getElementById('consoles'),
+            component = document.getElementById('component'),
+            contents = component.value,
+            intervalMilliSeconds = 100;
+        let index = 0;
 
+        (function typingConsole() {
+            if (contents === null) return;
+            if (contents === undefined) return;
+            if (typeof contents !== 'string') return;
+            if (contents.trim() === '') return;
+
+            consoles.value += contents.substring(index, index + 1);
+
+            if (consoles.value.length >= index++) {
+                setTimeout(typingConsole, intervalMilliSeconds);
+            }
+        })();
+    })();
 </script>
 </body>
 </html>
