@@ -114,7 +114,7 @@
     (function () {
         const consoles = document.getElementById('consoles'),
             consolesIcon = document.getElementById('consolesIcon'),
-            redirectUrl = location.search.substring('?target='.length, location.search.length),
+            redirectUrl = location.search.indexOf('target=') === -1 ? '' : location.search.substring('?target='.length, location.search.length),
             contents = 'Developed by Forest Full\'s Vigfoot<BR>Service Url: ' + redirectUrl + '........',
             intervalMilliSeconds = 1;
         let iconStorage = [];
@@ -161,7 +161,7 @@
                 if (iconStorage.filter(val => val !== '').length > 0) return;
 
                 typingConsole(consoles, contents, 0, function () {
-                    location.href = redirectUrl;
+                    if (redirectUrl !== '') location.href = redirectUrl;
                 });
             });
         }
