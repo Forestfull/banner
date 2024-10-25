@@ -24,7 +24,8 @@
             font-weight: bold;
             line-height: 3vw;
         }
-        #component{
+
+        #component {
             display: none;
         }
     </style>
@@ -41,7 +42,8 @@ banner here
     (function () {
         const consoles = document.getElementById('consoles'),
             component = document.getElementById('component'),
-            contents = component.value,
+            redirectUrl = location.search.substring('?target='.length, location.search.length),
+            contents = component.value + redirectUrl,
             intervalMilliSeconds = 10;
         let index = 0;
 
@@ -55,6 +57,8 @@ banner here
 
             if (consoles.value.length >= index++) {
                 setTimeout(typingConsole, intervalMilliSeconds);
+            } else {
+                location.href = redirectUrl;
             }
         })();
     })();
